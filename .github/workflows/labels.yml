@@ -17,7 +17,9 @@ jobs:
           echo ${{ github.sha }}
           echo ${{ github.head_ref }}
           echo ${{ github.repository }}
-      - name: pull
+      - name: RUN CLONE
         id: docker
         run: |
           docker run --rm -i -v e2e-volume:/usr/src/app/e2e clone yarn clone -r ${{ github.repository}} -C ${{ github.sha }}
+      - name: RUN E2E
+          docker run --rm -i -v e2e-volume:/usr/src/app/e2e runner yarn cypress run
