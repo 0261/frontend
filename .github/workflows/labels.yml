@@ -20,5 +20,4 @@ jobs:
       - name: pull
         id: docker
         run: |
-          docker pull padakim/clone
-          docker run --rm -i -v e2e-volume:/usr/src/app/e2e padakim/clone yarn clone -r ${{ github.repository}} -C ${{ github.sha }}
+          docker run --rm -i -v e2e-volume:/usr/src/app/e2e clone yarn clone -r ${{ github.repository}} -C ${{ github.sha }}
