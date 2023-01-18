@@ -1,0 +1,25 @@
+name: ISSUE LABEL
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  FUNCTION_REVIEW:
+    if: github.event.label.name == '2.Function Review'
+    runs-on: cypress
+    steps:
+      - uses: actions/checkout@v2
+      - name: branch name
+        id: branch-name
+        run: |
+          echo ${{ github.sha }}
+          echo ${{ github.head_ref }}
+          echo ${{ github.repository }}
+      - name: pull
+        id: docker
+        run: |
+          docker pull padakim/clone
+          docker run --rm -i -v e2e-volume:/usr/src/app/e2e padakim/clone yarn clone -r ${{ github.repository}} -C ${{ github.sha }}
+
