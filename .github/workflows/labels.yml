@@ -8,7 +8,7 @@ on:
 jobs:
   FUNCTION_REVIEW:
     if: github.event.label.name == '2.Function Review'
-    runs-on: 0261
+    runs-on: "0261"
     steps:
       - uses: actions/checkout@v2
       - name: branch name
