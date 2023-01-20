@@ -20,13 +20,8 @@ jobs:
       - name: RUN CLONE
         id: clone
         run: |
-          docker run --rm -i -v e2e-volume:/usr/src/app/e2e clone yarn clone -r ${{ github.repository}} -C ${{ github.sha }} -s center
+          docker run --rm -i -v e2e:/usr/src/app/e2e clone yarn clone -r ${{ github.repository}} -C ${{ github.sha }} -s center
       - name: RUN E2E
         id: e2e
         run: |
-          docker run --rm -i -v e2e-volume:/usr/src/app/e2e runner yarn cypress run
-      - name: RUN REPORT
-        id: report
-        run: |
-          docker run --rm -i -v e2e-volume:/usr/src/app runner yarn report:merge
-          docker run --rm -i -v e2e-volume:/usr/src/app runner yarn report:generate   
+          docker run --rm -i -v e2e:/usr/src/app/e2e runner yarn cypress ru
