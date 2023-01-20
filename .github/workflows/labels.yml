@@ -20,8 +20,9 @@ jobs:
       - name: RUN CLONE
         id: clone
         run: |
-          docker run --rm -i -v e2e:/usr/src/app/e2e clone yarn clone -r ${{ github.repository}} -C ${{ github.sha }} -s center
-      - name: RUN E2E
-        id: e2e
-        run: |
-          docker run --rm -i -v e2e:/usr/src/app/e2e runner yarn cypress ru
+          docker run \
+          --rm \
+          -i \
+          -v e2e:/usr/src/app/e2e \
+          -v /var/run/docker.sock:/var/run/docker.sock docker \
+          clone yarn clone -r ${{ github.repository}} -C ${{ github.sha }} 
