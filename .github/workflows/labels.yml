@@ -8,7 +8,7 @@ on:
 jobs:
   FUNCTION_REVIEW:
     if: github.event.label.name == '2.Function Review'
-    runs-on: macOS
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - name: branch name
